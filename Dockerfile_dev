@@ -1,0 +1,44 @@
+FROM mambaorg/micromamba:cuda12.6.2-ubuntu24.04
+
+# Micromamba setup
+COPY --chown=$MAMBA_USER:$MAMBA_USER config/dev/env.yaml /tmp/env.yaml
+RUN micromamba install -y -n base -f /tmp/env.yaml && micromamba clean --all --yes
+
+
+###############################################
+# BECOME ROOT
+#############
+
+USER 0
+# mamba is UNAVAILIBLE in this section
+# systems level installs should happen now
+
+
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    git \
+    vim \
+    && rm -rf /var/lib/apt/lists/*
+
+
+
+
+###############################################
+# Loose root, activate mamba
+############################
+
+USER $MAMBA_USER
+# mamba is AVAILIBLE
+# user is no longer root
+
+
+# .bashrc
+COPY config/dev/.bashrc /home/$MAMBA_USER/.bashrc
+
+
+
+###############################################
+# Finally put us at home
+############################
+
+WORKDIR /home/$MAMBA_USER/
+
