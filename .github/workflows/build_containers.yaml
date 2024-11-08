@@ -5,15 +5,10 @@ on:
     inputs: 
 
     image_name:
-      type: string
+      description: 'name for the final image'
       required: true
-
-    additional_args:
+      default: 'dev'
       type: string
-      required: false
-      default: ""
-
-
 
 jobs:
   Build:
@@ -31,7 +26,7 @@ jobs:
         run: |
 
           chmod +x build_image.sh
-          ./build_image.sh -n ${{ inputs.image_name }} ${{ inputs.additional_args }}
+          ./build_image.sh -n ${{ inputs.image_name }}
 
       - name: Save as artifact
         uses: actions/upload-artifact@v4
