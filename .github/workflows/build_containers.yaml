@@ -13,8 +13,6 @@ on:
 jobs:
   Build:
 
-    if: github.event_name == 'workflow_dispatch'
-
     runs-on: ubuntu-latest
 
     name: Manual Build
@@ -26,11 +24,11 @@ jobs:
         run: |
 
           chmod +x build_image.sh
-          ./build_image.sh -n ${{ inputs.name }}
+          ./build_image.sh -n dev
 
       - name: Save as artifact
         uses: actions/upload-artifact@v4
         with:
           name: build_image 
-          path: "images/${{ inputs.name }}"
+          path: "images/dev.tar
 
