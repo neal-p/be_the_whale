@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
     inputs: 
 
-    image_name:
+    name:
       description: 'name for the final image'
       required: true
       default: 'dev'
@@ -26,11 +26,11 @@ jobs:
         run: |
 
           chmod +x build_image.sh
-          ./build_image.sh -n ${{ inputs.image_name }}
+          ./build_image.sh -n ${{ inputs.name }}
 
       - name: Save as artifact
         uses: actions/upload-artifact@v4
         with:
           name: build_image 
-          path: "images/${{inputs.image_name}}"
+          path: "images/${{ inputs.name }}"
 
