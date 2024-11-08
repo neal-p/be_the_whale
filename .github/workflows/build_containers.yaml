@@ -29,6 +29,6 @@ jobs:
       - name: Save as artifact
         uses: actions/upload-artifact@v4
         with:
-          name: build_image 
-          path: images/dev.tar
+          name: my_image
+          path: dev.tar
 
