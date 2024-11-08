@@ -6,7 +6,6 @@ on:
 
     image_name:
       required: true
-      default: "be_the_whale_image.tar"
 
     additional_args:
       required: false
@@ -30,7 +29,7 @@ jobs:
         run: |
 
           chmod +x build_image.sh
-          ./build_image.sh ${{ inputs.image_name }} ${{ inputs.additional_args }}
+          ./build_image.sh -n ${{ inputs.image_name }} ${{ inputs.additional_args }}
 
       - name: Save as artifact
         uses: actions/upload-artifact@v4
