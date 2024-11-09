@@ -20,6 +20,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     && rm -rf /var/lib/apt/lists/*
 
 
+# Make the /opt/conda folder shared
+RUN chmod -R 777 /opt/conda
 
 
 ###############################################
@@ -42,3 +44,14 @@ COPY config/dev/.bashrc /home/$MAMBA_USER/.bashrc
 
 WORKDIR /home/$MAMBA_USER/
 
+RUN printf '#!/bin/bash\n\
+umask 000\n\
+if [[ "$@" == "" ]]; then\n\
+        bash\n\
+else\n\
+        exec "$@"\n\
+fi\n' >> entrypoint.sh && chmod +x entrypoint.sh
+
+
+
+ENTRYPOINT ["/home/mambauser/entrypoint.sh"]

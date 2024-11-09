@@ -77,7 +77,7 @@ echo "File: $file"
 # Actual Build
 ##############
 
-docker build . --file $file -t be_the_whale/$name
-docker save --output=$name.tar be_the_whale/$name
+docker build . --file $file -t $name
+docker save --output=$name.tar $name
 
 echo "Done"
