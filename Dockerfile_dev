@@ -16,7 +16,7 @@ USER 0
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
     git \
-    vim \
+    neovim \
     && rm -rf /var/lib/apt/lists/*
 
 
@@ -35,7 +35,6 @@ USER $MAMBA_USER
 
 # .bashrc
 COPY config/dev/.bashrc /home/$MAMBA_USER/.bashrc
-
 
 
 ###############################################

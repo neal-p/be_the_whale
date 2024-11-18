@@ -1,7 +1,7 @@
 #!/bin/bash
 
-CONFIG_FILE="docker_interactive_args.txt"
-SHARED_DIRS_FILE="shared_directories.txt"
+CONFIG_FILE="config/docker_interactive_args.txt"
+SHARED_DIRS_FILE="config/interactive_directories.txt"
 
 
 # Default values
